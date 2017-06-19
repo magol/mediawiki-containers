@@ -9,10 +9,10 @@ environment (native shell when using native Docker):
 # Clone k8s branch of mediawiki-containers
 git clone git@github.com:wikimedia/mediawiki-containers.git
 cd mediawiki-containers
-git checkout k8s
+git checkout master
 
 # start cluster
-kubectl apply -f k8s-alpha.yml
+kubectl apply -f mediawiki-dev.yaml
 
 # find the minikube IP
 minikube ip
