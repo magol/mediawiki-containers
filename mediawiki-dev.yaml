@@ -56,15 +56,14 @@ data:
 
     # Debug
     $wgShowExceptionDetails = true;
-    $wgDebugToolbar = true;
-    $wgShowDebug = true;
+    #$wgDebugToolbar = true;
+    #$wgShowDebug = true;
     $wgDevelopmentWarnings = true;
     $wgShowSQLErrors = true;
     $wgDebugDumpSql = true;
     $wgShowDBErrorBacktrace = true;
     $wgDebugComments = true;
-    $wgShowExceptionDetails = true;
-
+    
     # MySQL specific settings
     $wgDBprefix         = "mw_";
 
@@ -78,22 +77,36 @@ data:
     $wgMainCacheType = CACHE_DB;
 
     /**
-     * VisualEditor, Citoid and co
+     * VisualEditor
+     * https://www.mediawiki.org/wiki/Extension:VisualEditor
      */
     wfLoadExtension( 'VisualEditor' );
-    wfLoadExtension( 'ParserFunctions' );
-    wfLoadExtension( 'TemplateData' );
-    wfLoadExtension( 'Cite' );
-    wfLoadExtension( 'Citoid' );
+    # Enable by default for everybody
     $wgDefaultUserOptions['visualeditor-enable'] = 1;
+    # Don't allow users to disable it
     $wgHiddenPrefs[] = 'visualeditor-enable';
+    # OPTIONAL: Enable VisualEditor's experimental code features
+    $wgDefaultUserOptions['visualeditor-enable-experimental'] = 1;
+    #Parsoid connection
     $wgVirtualRestConfig['modules']['restbase'] = array(
+      # URL to the Parsoid instance
+      # Use port 8142 if you use the Debian package
       'url' => 'http://restbase-svc:7231',
+      # Parsoid "domain"
       'domain' => 'localhost',
       'forwardCookies' => true,
       'parsoidCompat' => false
     );
+
+    /**
+     * ParserFunctions
+     */
+    wfLoadExtension( 'ParserFunctions' );
     $wgPFEnableStringFunctions = true;
+
+    wfLoadExtension( 'TemplateData' );
+    wfLoadExtension( 'Cite' );
+    wfLoadExtension( 'Citoid' );
     $wgTemplateDataUseGUI = true;
 
     /**
