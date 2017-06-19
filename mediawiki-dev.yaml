@@ -1,4 +1,4 @@
-# BEGIN MySQL
+﻿# BEGIN MySQL
 
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -53,6 +53,26 @@ data:
     $wgServer = '//' . $_SERVER['HTTP_HOST'];
     $wgArticlePath = '/wiki/$1';
     $wgScriptPath = '/w';
+
+    # Debug
+    $wgShowExceptionDetails = true;
+    $wgDebugToolbar = true;
+    $wgShowDebug = true;
+    $wgDevelopmentWarnings = true;
+    $wgShowSQLErrors = true;
+    $wgDebugDumpSql = true;
+    $wgShowDBErrorBacktrace = true;
+    $wgDebugComments = true;
+    $wgShowExceptionDetails = true;
+
+    # MySQL specific settings
+    $wgDBprefix         = "mw_";
+
+    # MySQL table options to use during installation or update
+    $wgDBTableOptions   = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
+
+    # Experimental charset support for MySQL 5.0.
+    $wgDBmysql5 = true;
 
     # Enable database caching
     $wgMainCacheType = CACHE_DB;
@@ -117,9 +137,9 @@ spec:
             - name: MEDIAWIKI_SITE_SERVER
               value: 'configured-in-CustomSettings.php'
             - name: MEDIAWIKI_SITE_NAME
-              value: MediaWiki
+              value: SAG wiki
             - name: MEDIAWIKI_SITE_LANG
-              value: en
+              value: sv
             - name: MEDIAWIKI_ADMIN_USER
               value: admin
             - name: MEDIAWIKI_ADMIN_PASS
