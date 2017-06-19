@@ -76,6 +76,24 @@ data:
     # Enable database caching
     $wgMainCacheType = CACHE_DB;
 
+    # Anger att historiken för senaste ändrade sidor ska vara 13 veckor
+    $wgRCMaxAge = 13 * 7 * 24 * 3600;
+
+    # Site language code, should be one of the list in ./languages/Names.php
+    $wgLanguageCode = "sv";
+    ## If you use ImageMagick (or any other shell command) on a
+    ## Linux server, this will need to be set to the name of an
+    ## available UTF-8 locale
+    $wgShellLocale = "sv_SE.utf8";
+    # InstantCommons allows wiki to use images from https://commons.wikimedia.org
+    $wgUseInstantCommons  = false;
+    
+    ## To enable image uploads, make sure the 'images' directory
+    ## is writable, then set this to true:
+    $wgEnableUploads  = true;
+    $wgUseImageMagick = true;
+
+
     /**
      * VisualEditor
      * https://www.mediawiki.org/wiki/Extension:VisualEditor
@@ -104,10 +122,21 @@ data:
     wfLoadExtension( 'ParserFunctions' );
     $wgPFEnableStringFunctions = true;
 
+    /**
+     * TemplateData
+     */
     wfLoadExtension( 'TemplateData' );
-    wfLoadExtension( 'Cite' );
-    wfLoadExtension( 'Citoid' );
     $wgTemplateDataUseGUI = true;
+
+    /**
+     * Cite
+     */
+    wfLoadExtension( 'Cite' );
+
+    /**
+     * Citoid
+     */
+    wfLoadExtension( 'Citoid' );
 
     /**
      * ChangeProp and EventBus
@@ -130,6 +159,18 @@ data:
     wfLoadExtension( 'MobileFrontend' );
     wfLoadExtension( 'TextExtracts' );
     wfLoadExtension( 'PageImages' );
+
+    /**
+     * SyntaxHighlight_GeSHi
+     */
+    wfLoadExtension( 'SyntaxHighlight_GeSHi' );
+
+    /**
+     * Scribunto
+     * Används för infobox
+     */
+     require_once "$IP/extensions/Scribunto/Scribunto.php";
+     $wgScribuntoDefaultEngine = 'luastandalone';
 
 ---
 apiVersion: apps/v1beta1
